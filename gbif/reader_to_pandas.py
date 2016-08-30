@@ -22,10 +22,3 @@ with DwCAReader(dwca_name) as dwca:
 
 # further analysis with the df:
 print(core_df.head())
-
-
-
-
-
-
-
