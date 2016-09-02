@@ -1,2 +1,3 @@
-# python-snippets
-Collection of useful python scripts and tricks
+# Python utilities for INBO
+
+Collection of useful python utilities and snippets
