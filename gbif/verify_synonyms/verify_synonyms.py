@@ -20,8 +20,8 @@ def verify_synonym(input_file, output_file, synonym_file,
 
     Parameters:
     --------
-    input_file: str (filepath)
-        input file to check the synonym values    
+    input_file: str (filepath) | pd.DataFrame
+        input file to check the synonym values or pandas Dataframe
     output_file: str (filepath)
         output file to write result    
     synonym_file: str
@@ -41,13 +41,22 @@ def verify_synonym(input_file, output_file, synonym_file,
     columns are fixed and should be equal to respectively `gbifapi_usageKey`,  
     `gbifapi_acceptedKey` and 'status'
     """
-    # Reading in the files (csv or tsv)
-    if input_file.endswith('tsv'):
-        delimiter = '\t'
+    
+    
+    if isinstance(input_file, str):
+        # Reading in the files (csv or tsv)
+        if input_file.endswith('tsv'):
+            delimiter = '\t'
+        else:
+            delimiter = ','
+        input_file = pd.read_csv(input_file, sep=delimiter, 
+                                encoding='utf-8', dtype=object)  
+    elif isinstance(input_file, pd.DataFrame):
+        input_file = input_file.copy()
     else:
-        delimiter = ','
-    input_file = pd.read_csv(input_file, sep=delimiter, dtype=object)                
-
+        raise Exception('Input datatype not supported, use either str or a \
+                            pandas DataFrame')
+    
     # read the synonyms file    
     synonyms = pd.read_csv(synonym_file, sep='\t', dtype=object)
     
@@ -68,7 +77,8 @@ def verify_synonym(input_file, output_file, synonym_file,
         verified = verified.rename(columns={'status' : outputcol})        
 
     verified.to_csv(output_file, sep=delimiter, index=False, 
-                        encoding='utf-8')    
+                        encoding='utf-8')
+    return verified
 
 
 def main(argv=None):
