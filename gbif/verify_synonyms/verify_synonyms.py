@@ -31,7 +31,7 @@ def verify_synonym(input_file, output_file, synonym_file,
     acceptedkeycol: str (default: gbifapi_acceptedKey)
         column name with the acceptedKey for input_file  
     taxonomicstatuscol: str (default: gbif_apistatus)
-        column name with the API status of GBIF for input_file  
+        column name with the API status of GBIF for input_file, NOT  status
     outputcol: str
         column name to put the remarks of the verification of the input file
         
@@ -41,6 +41,8 @@ def verify_synonym(input_file, output_file, synonym_file,
     columns are fixed and should be equal to respectively `gbifapi_usageKey`,  
     `gbifapi_acceptedKey` and 'status'
     """
+    if taxonomicstatuscol == "status":
+        raise Exception('Change name of the status column of your input file')
 
     if isinstance(input_file, str):
         # Reading in the files (csv or tsv)
