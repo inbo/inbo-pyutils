@@ -22,8 +22,8 @@ def verify_synonym(input_file, output_file, synonym_file,
     --------
     input_file: str (filepath) | pd.DataFrame
         input file to check the synonym values or pandas Dataframe
-    output_file: str (filepath)
-        output file to write result    
+    output_file: str (filepath) | None
+        output file to write result, if None, no output file will be created
     synonym_file: str
         relatie path to the synonym file for the verification
     usagekeycol: str (default: gbifapi_usageKey)
@@ -31,7 +31,7 @@ def verify_synonym(input_file, output_file, synonym_file,
     acceptedkeycol: str (default: gbifapi_acceptedKey)
         column name with the acceptedKey for input_file  
     taxonomicstatuscol: str (default: gbif_apistatus)
-        column name with the API status of GBIF for input_file  
+        column name with the API status of GBIF for input_file, NOT  status
     outputcol: str
         column name to put the remarks of the verification of the input file
         
@@ -41,6 +41,8 @@ def verify_synonym(input_file, output_file, synonym_file,
     columns are fixed and should be equal to respectively `gbifapi_usageKey`,  
     `gbifapi_acceptedKey` and 'status'
     """
+    if taxonomicstatuscol == "status":
+        raise Exception('Change name of the status column of your input file')
 
     if isinstance(input_file, str):
         # Reading in the files (csv or tsv)
@@ -74,10 +76,11 @@ def verify_synonym(input_file, output_file, synonym_file,
             verified.loc[verified[taxonomicstatuscol] == "SYNONYM", 'status']
         verified = verified.drop('status', axis=1)
     else:
-        verified = verified.rename(columns={'status' : outputcol})        
-
-    verified.to_csv(output_file, sep=delimiter, index=False, 
-                        encoding='utf-8')
+        verified = verified.rename(columns={'status' : outputcol})
+        
+    if (output != None) & isinstance(output,str):
+        verified.to_csv(output_file, sep=delimiter, index=False, 
+                            encoding='utf-8')
     return verified
 
 
