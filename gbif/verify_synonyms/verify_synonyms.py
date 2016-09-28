@@ -22,8 +22,8 @@ def verify_synonym(input_file, output_file, synonym_file,
     --------
     input_file: str (filepath) | pd.DataFrame
         input file to check the synonym values or pandas Dataframe
-    output_file: str (filepath)
-        output file to write result    
+    output_file: str (filepath) | None
+        output file to write result, if None, no output file will be created
     synonym_file: str
         relatie path to the synonym file for the verification
     usagekeycol: str (default: gbifapi_usageKey)
@@ -76,10 +76,11 @@ def verify_synonym(input_file, output_file, synonym_file,
             verified.loc[verified[taxonomicstatuscol] == "SYNONYM", 'status']
         verified = verified.drop('status', axis=1)
     else:
-        verified = verified.rename(columns={'status' : outputcol})        
-
-    verified.to_csv(output_file, sep=delimiter, index=False, 
-                        encoding='utf-8')
+        verified = verified.rename(columns={'status' : outputcol})
+        
+    if (output != None) & isinstance(output,str):
+        verified.to_csv(output_file, sep=delimiter, index=False, 
+                            encoding='utf-8')
     return verified
 
 
