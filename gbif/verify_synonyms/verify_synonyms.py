@@ -41,8 +41,7 @@ def verify_synonym(input_file, output_file, synonym_file,
     columns are fixed and should be equal to respectively `gbifapi_usageKey`,  
     `gbifapi_acceptedKey` and 'status'
     """
-    
-    
+
     if isinstance(input_file, str):
         # Reading in the files (csv or tsv)
         if input_file.endswith('tsv'):
@@ -52,6 +51,7 @@ def verify_synonym(input_file, output_file, synonym_file,
         input_file = pd.read_csv(input_file, sep=delimiter, 
                                 encoding='utf-8', dtype=object)  
     elif isinstance(input_file, pd.DataFrame):
+        delimiter = ',' # Patch: set a delimiter for the output file
         input_file = input_file.copy()
     else:
         raise Exception('Input datatype not supported, use either str or a \
