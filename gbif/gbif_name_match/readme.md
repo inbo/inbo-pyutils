@@ -87,3 +87,33 @@ The function `extract_gbif_accepted_key` searches for an acceptedKey correspondi
         key of the accepted name synonym
     acceptedScientificName : str
         scientific name of the accepted name synonym
+
+### Examples
+* To add the GBIF API information to an existing file (csv), saving as a new file
+```bash
+python gbif_species_name_extraction.py file_in.csv fileout.csv
+```
+
+* To add the GBIF API information to an existing file (csv), using the strict name matching from GBIF
+
+```bash
+python gbif_species_name_extraction.py file_in.csv fileout.csv --strict True
+```    
+
+* To add the GBIF API information to an existing file (csv), overwriting the same file
+```bash
+python gbif_species_name_extraction.py file.csv file.csv  
+```
+* To update the GBIF API information to an existing file (csv)
+```bash
+python gbif_species_name_extraction.py --update True file.csv file.csv
+```    
+* To update the GBIF API information to an existing file, defining the column to use for scientificName and kingdom
+```bash
+python gbif_species_name_extraction.py --namecol columnheader1 --kingdomcol columnheader2 --update True file1.tsv
+file1.tsv
+```
+* Only add the terms status, rank and matchType as columns (acceptedKey is always added)
+```bash
+python gbif_species_name_extraction.py file.csv file.csv --api_terms status rank matchType   
+```
