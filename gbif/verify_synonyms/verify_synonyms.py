@@ -79,7 +79,7 @@ def verify_synonym(input_file, output_file, synonym_file,
     else:
         verified = verified.rename(columns={'status' : outputcol})
         
-    if (output != None) & isinstance(output,str):
+    if (output_file != None) & isinstance(output_file, str):
         verified.to_csv(output_file, sep=delimiter, index=False, 
                             encoding='utf-8')
     return verified
