@@ -1,4 +1,3 @@
-
 # GUI application to split a shapefile based on a field attribute
 
 ## Introduction
@@ -9,19 +8,19 @@ This code provides a user interface approach to split a shapefile on the attribu
 
 ### Starting the GUI
 
-Currently, the GUI-version can be started by starting the python script from the command line as follows:
+The GUI application can be started from the command line as follows:
 
 ```
 python split_shapefile_by_attributes.py
 ```
 
-The interface dialogs will appear to ask for the required inputs:
-* The shapefile to use for the split
-* The folder to save the resulting set of shapefiles
-* A menu to select the field name on which the split is based
+This will bring up the following GUI elements, in order:
 
-Click `Start splitting`... 
+1. A window to select the shapefile you want to split
+2. A window to select a directory to which the resulting shapefiles should be saved to
+3. A menu to select the attribute name on which you want to split the shapefile
 
+Click `Start splitting` to execute the split.
 
 ### Python function
 
@@ -29,11 +28,9 @@ The functionality itself is available as a python function `split_shape_by_attri
 
 When running the function inside Python, make sure the location is added to the PATH in order to enable the import of the function.
 
-Similar to the GUI functionality, the python function `split_shape_by_attribute` reads an input file, request the information from GBIF and adds the required information from the mapping.
+Similar to the GUI functionality, the python function `split_shape_by_attribute` requires an input file, an output directory and an attribute name:
 
 ```python
 from split_shapefile_by_attributes import split_shape_by_attribute
 split_shape_by_attribute("my_shapefile.shp", "./output_dir", "TAG")
 ```
-
-
