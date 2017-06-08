@@ -31,7 +31,7 @@ When running the function inside Python, make sure the location is added to the 
 
 Similar to the GUI functionality, the python function `split_shape_by_attribute` reads an input file, request the information from GBIF and adds the required information from the mapping.
 
-```
+```python
 from split_shapefile_by_attributes import split_shape_by_attribute
 split_shape_by_attribute("my_shapefile.shp", "./output_dir", "TAG")
 ```
