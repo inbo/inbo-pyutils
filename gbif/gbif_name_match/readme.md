@@ -8,7 +8,7 @@ This small utility provides the functionality to add the species information fro
 
 ## Functionality
 
-The functionality can be loaded within Python itself by importin the function `extract_species_information` or by running the script from the command line.
+The functionality can be loaded within Python itself by importing the function `extract_species_information` or by running the script from the command line.
 
 ### Command line function
 To check the functionality of the command line function, request for help as follows:
