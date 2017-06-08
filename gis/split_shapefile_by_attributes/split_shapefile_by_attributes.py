@@ -35,6 +35,14 @@ class AttributeSelect(Tk):
         self.destroy()
 
 def create_field_form(options):
+    """Create the attibute selection field with given options list
+
+    Parameters
+    ----------
+    options : list
+        List of strings as menu options
+    
+    """
     form = AttributeSelect(None, options)
     form.title('Select the field to split the shapefile')
     form.mainloop()
@@ -43,7 +51,16 @@ def create_field_form(options):
 
 
 def gui_inputs():
-    """
+    """create gui interface and return the required inputs 
+
+    Returns
+    -------
+    infile : str
+        pathname to the shapefile to apply the split
+    field : str
+        name of the field in the shape file
+    dest : str
+        folder name to save the outputs
     """
     # locate your input shapefile
     print("select your input file")
