@@ -54,18 +54,30 @@ def gui_inputs():
 
 
 def batch_rename_field_shapefile(input_shapefile, info_file, output_shapefile):
+    '''
+    batch rename the fields of a shapefile
 
+    using a for loop, the old fieldnames are replace by the new fieldnames
+    
+    '''
+    # read the input shapefile
     shapefile = gpd.read_file(input_shapefile)
+    # read the input textfile
     mapping = pd.read_csv(info_file, delimiter = ";", lineterminator = "\n", header = None)
+    # Columnnames 'from' (old fieldnames) and 'to' (new fieldnames) are assigned to the columns in the textfile.
     mapping.columns = ('from', 'to')
+    # Creates a dictionary which includes with the old fieldnames as index and the new fieldnames as keys.
     dict_mapping = mapping.set_index('from').to_dict()['to']
+    # For loop to replace the old fieldnames by the new fieldnames.
     new_names = []
     for name in shapefile.columns:
         if name in dict_mapping.keys():
             new_names.append(dict_mapping[name])
         else:
             new_names.append(name)
+    # Assign the new fieldnames as column headers (fieldnames) in the shapefile.
     shapefile.columns = new_names
+    # Write the shapefile with the new fieldnames to the defined location.
     shapefile.to_file(output_shapefile)
 
 
