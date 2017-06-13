@@ -38,3 +38,16 @@ This will bring up the following GUI elements, in order:
 * A window to define the output location and the output filename.shp.
 
 The renaming procedure will start automatically after the input are defined.
+
+### Python function
+
+The functionality itself is available as a python function `batch_rename_field_shapefile`, which can be imported as Python module.
+
+When running the function inside Python, make sure the location is added to the PATH in order to enable the import of the function.
+
+Similar to the GUI functionality, the python function `batch_rename_field_shapefile` requires an input file, an info file for the mapping and an output file:
+
+```python
+from batch_rename_fields_shapefile import batch_rename_field_shapefile
+batch_rename_field_shapefile("my_shapefile.shp", "my_mapping_file.txt", "my_converted_shapfile.py")
+```
