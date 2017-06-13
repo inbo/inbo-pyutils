@@ -10,25 +10,24 @@ import fiona
 import pandas as pd
 import geopandas as gpd
 
-def gui_inputs():
-    """
 
-    Creates a GUI interface and returns the required inputs. 
+def gui_inputs():
+    """Creates a GUI interface and returns the required inputs. 
 
     Returns
     -------
     input_shapefile : str
-        pathname to the shapefile with the 'to be converted' fieldnames/columnnames 
+        path name to the shapefile with the 'to be converted' fieldnames/columnnames 
 
     info_file : str
-        pathname to the textfile with the old and new fieldnames. The file is structured as follows (:
-            * header = None, delimiter = ";", lineterminator = "\n" 
-            * old_fieldname_1;new_fieldname_1
-            * old_fieldname_2;new_fieldname_2
-            * ...
+        pathname to the textfile with the old and new fieldnames. The file is structured as follows: 
+        header = None, delimiter = ";", lineterminator = "\n", e.g. 
+            old_fieldname_1;new_fieldname_1
+            old_fieldname_2;new_fieldname_2
+            ...
 
     output_shapefile : str
-        Define the output location and the output filename.shp
+        path name to the output shapefile
 
     """
 
@@ -52,13 +51,24 @@ def gui_inputs():
     return input_shapefile, info_file, output_shapefile
 
 
-
 def batch_rename_field_shapefile(input_shapefile, info_file, output_shapefile):
-    '''
-    batch rename the fields of a shapefile
+    '''Batch rename the fields of a shapefile
 
-    using a for loop, the old fieldnames are replace by the new fieldnames
-    
+    Using a for loop, the old fieldnames are replaced by the new fieldnames
+
+    Parameters
+    -----------
+    input_shapefile : str
+        path name to the shapefile with the 'to be converted' fieldnames/columnnames 
+    info_file : str
+        pathname to the textfile with the old and new fieldnames. The file is structured as follows: 
+        header = None, delimiter = ";", lineterminator = "\n", e.g. 
+            old_fieldname_1;new_fieldname_1
+            old_fieldname_2;new_fieldname_2
+            ...
+    output_shapefile : str
+        path name to the output shapefile
+
     '''
     # read the input shapefile
     shapefile = gpd.read_file(input_shapefile)
@@ -81,10 +91,9 @@ def batch_rename_field_shapefile(input_shapefile, info_file, output_shapefile):
     shapefile.to_file(output_shapefile)
 
 
-
 def main(argv=None):
     """
-    """     
+    """
     print("starting GUI...")
     input_shapefile, info_file, output_shapefile = gui_inputs()
     
