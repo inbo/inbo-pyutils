@@ -51,3 +51,7 @@ Similar to the GUI functionality, the python function `batch_rename_field_shapef
 from batch_rename_fields_shapefile import batch_rename_field_shapefile
 batch_rename_field_shapefile("my_shapefile.shp", "my_mapping_file.txt", "my_converted_shapfile.py")
 ```
+
+## Example
+
+To illustrate the functionality, an inline example is provided in the [notebook](https://github.com/inbo/inbo-pyutils/blob/master/gis/batch_rename_fields_shapefile/batch_rename_fields_shapefile.ipynb). Also, an example [textfile](https://github.com/inbo/inbo-pyutils/blob/master/gis/batch_rename_fields_shapefile/mapping_example.txt) is provided.
