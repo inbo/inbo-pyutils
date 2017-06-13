@@ -1,2 +1,11 @@
-bos;forest
-stad;city
+A;Apricot
+B;Banana
+C;Cherry
+D;Date
+E;Elderberry
+F;Fig
+G;Grape
+K;Kiwi
+L;Lemon
+M;Mango
+N;Nectarine
