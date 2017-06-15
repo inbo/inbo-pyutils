@@ -2,7 +2,7 @@
 
 ## Aim
 
-The aim is to easily convert the ***ERSI shapefile*** filetype to the open source ***GeoJSON*** filetype.
+The aim is to easily convert the ***ERSI shapefile*** filetype to the open data standard ***GeoJSON*** filetype.
 
 
 
@@ -41,7 +41,7 @@ Similar to the GUI functionality, the python function batch_convert_shapefile_to
 
 ```python
 from batch_convert_shapefile_to_geojson import batch_convert_shapefile_to_geojson
-batch_conver_shapefile_to_geojson("my_input_directory", "my_output_directory")
+batch_convert_shapefile_to_geojson("my_input_directory", "my_output_directory")
 ```
 
 
@@ -54,4 +54,4 @@ To illustrate the functionality, an inline example is provided in the [notebook]
 
 ## NOTE
 
-This is work in progress.  Code to covert geojson to shapefile will be added soon.
+This is work in progress.  Code to convert geojson to shapefile will be added soon.
