@@ -4,12 +4,9 @@
 
 The aim is to easily convert the ***ERSI shapefile*** filetype to the open data standard ***GeoJSON*** filetype.
 
-
-
 ## Introduction
 
 This code provides a user interface approach to batch convert shapefiles to GeoJSON. [Tkinter](https://wiki.python.org/moin/TkInter) (standard Python library) is used to provide the user interface. [Glob](https://docs.python.org/3/library/glob.html) (standard Python library) is used enlist the shapefiles while [json](https://docs.python.org/3/library/json.html) (standard Python library) and [pyshp](https://pypi.python.org/pypi/pyshp) are applied to perform the conversion.
-
 
 ## Functionality
 
@@ -28,8 +25,6 @@ This will bring up the following GUI elements, in order:
 
 The converting procedure will start automatically after the inputs are defined.
 
-
-
 ## Python function
 
 The functionality itself is available as a python function batch_convert_shapefile_to_geojson, which can be imported as Python module.
@@ -43,12 +38,17 @@ from batch_convert_shapefile_to_geojson import batch_convert_shapefile_to_geojso
 batch_convert_shapefile_to_geojson("my_input_directory", "my_output_directory")
 ```
 
-
-
 ## Example
 
 To illustrate the functionality, an inline example is provided in the [notebook](https://github.com/inbo/inbo-pyutils/blob/shapefile_geojson_shapefile/gis/shapefile_geojson_shapefile/batch_convert_shapefile_to_geojson.ipynb).
 
+## GDAL alternative
+
+Remark that the conversion of a spatial data file to another format is also supported by the [Geospatial Data Abstraction Library (GDAL)](http://www.gdal.org/). Sometimes it can be more convenient to perform the conversion using the command line utilities provided by GDAL (`ogr2ogr`). The conversion of the of an input `shapefile` to an output `geojson` file can be done as follows:
+
+```
+!ogr2ogr -f "GeoJSON" "output_file.geojson" "input_file.shp"
+```
 
 
 ## NOTE
