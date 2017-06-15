@@ -8,8 +8,7 @@ The aim is to easily convert the ***ERSI shapefile*** filetype to the open data 
 
 ## Introduction
 
-This code provides a user interface approach to batch convert shapefiles to GeoJSON. [Tkinter](https://wiki.python.org/moin/TkInter) is used to provide the user interface. [Glob](https://docs.python.org/3/library/glob.html) is used enlist the shapefiles while [json](https://docs.python.org/3/library/json.html) and [pyshp](https://pypi.python.org/pypi/pyshp) are applied to perform the conversion.
-
+This code provides a user interface approach to batch convert shapefiles to GeoJSON. [Tkinter](https://wiki.python.org/moin/TkInter) (standard Python library) is used to provide the user interface. [Glob](https://docs.python.org/3/library/glob.html) (standard Python library) is used enlist the shapefiles while [json](https://docs.python.org/3/library/json.html) (standard Python library) and [pyshp](https://pypi.python.org/pypi/pyshp) are applied to perform the conversion.
 
 
 ## Functionality
