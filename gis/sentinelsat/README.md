@@ -10,13 +10,13 @@ The aim of this project is threefold:
 2. to convert en process Sentinel-2 datasets to useful imagery (e.g. mosaics, RGB and NDVI images, ...),
 3. to batch clip Sentinel-2 imagery with a certain study area.
 
-Each of the aims is written as a standalone module, but "2" depends on the output of "1", while "3" depends on the output of "2".
+Each of the aims is written as a standalone module, but "2" depends on the output of "1", while "3" uses the output of "2".
 
 ## Downloading Sentinel-2 datasets
 
 ### Introduction
 
-This code provides a user interface approach to query and download Sentinel-2 datasets, covering Flanders (Belgium), from the [Copernicus Open Access Hub](https://scihub.copernicus.eu/). The code uses [tkinter](https://docs.python.org/3/library/tkinter.html) to provide the user interface, and the [sentinelsat](http://sentinelsat.readthedocs.io/en/master/index.html) utility to query and download Sentinel-2 satellite images from the [Copernicus Open Access Hub](https://scihub.copernicus.eu/). [collections](https://docs.python.org/3/library/collections.html) is used to access the results of the query, stored in a dictionary. *tkinter* and *collections* are part of [the Python Standard Library](https://docs.python.org/3/library/index.html).
+This code provides a user interface approach to query and download Sentinel-2 datasets, covering Flanders (Belgium), from the [Copernicus Open Access Hub](https://scihub.copernicus.eu/). The code uses [tkinter](https://docs.python.org/3/library/tkinter.html) to provide the user interface, and the [sentinelsat](http://sentinelsat.readthedocs.io/en/master/index.html) utility to query and download Sentinel-2 satellite images. [collections](https://docs.python.org/3/library/collections.html) is used to access the results of the query, stored in a dictionary. *tkinter* and *collections* are part of [the Python Standard Library](https://docs.python.org/3/library/index.html).
 
 ### Functionality
 
@@ -55,7 +55,7 @@ Only the overlapping imagery is kept for further processing. Image processing re
 
 1. A **GeoTiff** for **each granule**
 
-   Images (granules) are converted one by one from the JP2 to the GeoTiff fileformat. Meanwhile, coordinates are transformed from EPSG:32631 to EPSG:4326.
+   Images (granules) are converted one by one from the JP2 to the GeoTiff fileformat. Coordinates are transformed from EPSG:32631 to EPSG:4326.
 
 2. **Mosaic for each individual band**
 
@@ -63,11 +63,11 @@ Only the overlapping imagery is kept for further processing. Image processing re
 
 3. **RGB-image**
 
-   An RGB (Red-Green_Blue) image is created by stacking band B02 (Blue), B03 (Green) and B04 (Red) into one GeoTiff. The output coordinate system is EPSG:4326, the fileformat is GeoTiff.
+   An RGB (Red-Green-Blue) image is created by stacking band B02 (Blue), B03 (Green) and B04 (Red) into one GeoTiff. The code uses the mosaiced bands B02, B03 and B04 as input. The output coordinate system is EPSG:4326, the fileformat is GeoTiff.
 
 4. **NDVI-image**
 
-   Normalised Difference Vegetation Index. An NDVI image is created by performing a raster calculation using B04 (Red) and B08 (NIR): (B08 - B04) / (B08 + B04). The output coordinate system is EPSG:4326, the fileformat is GeoTiff.
+   Normalised Difference Vegetation Index. An NDVI image is created by performing a raster calculation using B04 (Red) and B08 (NIR): (B08 - B04) / (B08 + B04). The code uses the mosaiced bands B04 and B08 as input.The output coordinate system is EPSG:4326, the fileformat is GeoTiff.
 
 ### Functionality
 
