@@ -108,25 +108,116 @@ class INBOReferenceSearcher(object):
             return filename, self.get_gdrive_url(response['files'][0]['id'])
 
 
+TAG_PATTERN = "^[A-Z][A-Z0-9]  - "
+
+
+class RisRef(object):
+
+    def __init__(self, rislist):
+        """"""
+        self.rislist = rislist
+        self.keywords = self._extract_keywords()
+
+    def _extract_keywords(self):
+        """get all the key-words from the rislist"""
+        return [self.get_tag(line) if self.get_tag(line) else None for line in self.rislist]
+
+    @staticmethod
+    def is_tag(line):
+        pattern = re.compile(TAG_PATTERN)
+        return bool(pattern.match(line))
+
+    def get_tag(self, line):
+        """RIS file has always a setup of 'KW  - ', with the first two characters the tag"""
+        if self.is_tag(line):
+            return line[:2]
+        else:
+            return None
+
+    def get_content(self, line):
+        """RIS file has always a setup of 'KW  - ...', with the first 6 characters strictly defined"""
+        if self.is_tag(line):
+            return line[6:].strip()
+        else:
+            return None
+
+    def handle_st(self):
+        """if no ST field, add an empty st_field"""
+        if "ST" not in self.keywords:
+            # Provide the ST as an additional keyword
+            self.rislist.insert(-1, 'ST  - \n')
+            # Add ST to the keywords
+            self.keywords.append('ST')
+
+    def handle_ur(self):
+        """split multiple URL on a single line to multiple line"""
+        if 'UR' in self.keywords:
+            ur_index = self.keywords.index('UR') +1
+            while not self.is_tag(self.rislist[ur_index]):
+                self.rislist[ur_index] = ''.join(['UR  - ', self.rislist[ur_index]])
+                ur_index +=1
+
+    def handle_gdrivelink(self, ris_matcher):
+        """add a google drive link to the entry, after the L1 file statement"""
+
+        l1_index = self.keywords.index('L1')
+        line = self.rislist[l1_index]
+
+        filename = re.search("([^/&\\\]*?\.\S*)", line.rstrip()).group(0)
+
+        name, url = ris_matcher.search_file(filename)
+        if url:
+            self.rislist.insert(l1_index + 1, "".join(["UR  - ", url, "\n"]))
+
+    def handle_all(self, ris_matcher):
+        self.handle_ur()
+        self.handle_st()
+        self.handle_gdrivelink(ris_matcher)
+
+
+class Ris(object):
+
+    START_TAG = 'TY'
+    END_TAG = 'ER'
+    PATTERN = '^[A-Z][A-Z0-9]  - '
+
+    def __init__(self, file_object):
+        self.file_object = file_object
+        self._current_entry = []
+
+    def entries(self):
+        """generator to loop all the entries in a RIS-file"""
+
+        while True:
+            current_line = self.file_object.readline()
+            if not current_line:
+                break
+
+            #if not current_line == "\n": # skip empty lines
+            self._current_entry.append(current_line)
+
+            if current_line.startswith("ER"):
+                yield RisRef(self._current_entry)
+                self._current_entry = []
+
+
 def update_RIS_file(input_ris_file, updated_ris_file, credentials_file):
     """Enrich an exising RIS file in order to update the database entries
 
     For a given RIS file, following actions are taken to enrich the file:
+    - For a given set of URL's without the UR-keyword, provide the UR keyword
+    - When no ST keyword is available, provide an empty ST keyword
     - For a given file name of a bibliographic entry (L1), provide an additional line with the corresponding google drive URI (UR)
-    -
 
     """
     ris_matcher = INBOReferenceSearcher(credentials_file)
-    with open(input_ris_file, "r") as references:
-        with open(updated_ris_file, "w") as references_update:
-            for line in references.readlines():
-                references_update.write(line)
-                if line.find('L1') != -1:
-                    filename = re.search("([^/&\\\]*?\.\S*)", line.rstrip()).group(0)
-                    name, url = ris_matcher.search_file(filename)
-                    print(filename, name, url)
-                    if url:
-                        references_update.write("".join(["UR  - ", url, "\n"]))
+    with open(input_ris_file, 'r') as references:
+        with open(updated_ris_file, 'w') as references_update:
+            risser = Ris(references)
+            for entry in risser.entries():
+                entry.handle_all(ris_matcher)
+                references_update.writelines(entry.rislist)
+
 
 def main(argv=None):
     """
@@ -146,7 +237,7 @@ def main(argv=None):
     args = parser.parse_args()
 
     print("Processing RIS file...")
-    print(args)
+    print('quickly grab a coffee :-)')
     update_RIS_file(args.inputfile, args.outputfile, args.credentials)
     print("...processing done, the updated file is available at ", args.outputfile)
 
