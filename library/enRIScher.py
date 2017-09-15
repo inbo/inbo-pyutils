@@ -181,9 +181,17 @@ class Ris(object):
     END_TAG = 'ER'
     PATTERN = '^[A-Z][A-Z0-9]  - '
 
-    def __init__(self, file_object):
-        self.file_object = file_object
+    def __init__(self, file_name, mode='r'):
+        self.file_name = file_name
+        self.mode = mode
         self._current_entry = []
+
+    def __enter__(self):
+        self.file_object = open(self.file_name, self.mode)
+        return self
+
+    def __exit__(self, *args):
+        self.file_object.close()
 
     def entries(self):
         """generator to loop all the entries in a RIS-file"""
@@ -211,9 +219,8 @@ def update_RIS_file(input_ris_file, updated_ris_file, credentials_file):
 
     """
     ris_matcher = INBOReferenceSearcher(credentials_file)
-    with open(input_ris_file, 'r') as references:
+    with Ris(input_ris_file, 'r') as risser:
         with open(updated_ris_file, 'w') as references_update:
-            risser = Ris(references)
             for entry in risser.entries():
                 entry.handle_all(ris_matcher)
                 references_update.writelines(entry.rislist)
