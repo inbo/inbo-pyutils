@@ -5,7 +5,7 @@
 
 ### Introduction
 
-The main driver to develop the `enRIScher` module, was to automatically add the gdrive link of bibliographic references in an existing RIS file. Besides, some particularities about the import/export of RIS files in endnote are handled as well (split of multiple URL's in a single UR field, provide default ST fields). 
+The main driver to develop the `enRIScher` module, was to automatically add the gdrive link of bibliographic references in an existing RIS file. Besides, some particularities about the import/export of RIS files in endnote can be handled as well (split of multiple URL's in a single UR field, provide default ST fields). 
 
 ### Aim
 
