@@ -5,12 +5,12 @@
 # INBO
 
 from __future__ import print_function
-import httplib2
 import argparse
 import os
 import sys
 import re
 
+import httplib2
 from oauth2client.file import Storage
 from apiclient import discovery
 
