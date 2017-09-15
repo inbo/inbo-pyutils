@@ -39,7 +39,52 @@ During the tutorial, the location to write the API-json configuration is stored 
 
 ### Functionality
 
-https://developers.google.com/drive/v3/web/quickstart/python
+The functionality is intended as a command line tool, as follows
+
+```bash
+>> python enRIScher.py --help
+usage: enRIScher.py [-h] inputfile outputfile credentials
+
+Enrich a given RIS file
+
+positional arguments:
+  inputfile    the relative path and filename to the original RIS file
+  outputfile   the relative path and filename to the updated RIS file
+  credentials  the relative path and filename to the google API credentials
+               file
+
+optional arguments:
+  -h, --help   show this help message and exit
+```
+
+So, for example, consider the input file `library.ris`, the default location of the credentials file and requiring the new RIS file to be written into `updated_library.ris`, the command would be:
+
+```bash
+python enRIScher.py library.ris updated_library.ris ~/.credentials/drive-python-quickstart.json
+```
+
+Still, you're free to use the different classes and methods within Python itself as well. For example, to search for a specific file in the bibliographic teamdrive, use the `search_file` function:
+
+```python
+from enRIScher import INBOReferenceSearcher
+
+library = INBOReferenceSearcher('drive-python-quickstart.json')
+library.search_file("Anselin_2001_vogelnieuws2.pdf")
+```
+
+which returns:
+```
+('Anselin_2001_vogelnieuws2.pdf',
+ 'https://drive.google.com/open?id=0B7K_7SGyjAgMVlZtWXVnVDBmd3M')
+```
+
+More general queries are possible as well with the `query_references` method , explained [here](https://developers.google.com/drive/v3/web/search-parameters#fn1). For example, to find all files for which the file name contains `DNA` in the file name:
+
+```
+library.query_references("name contains 'DNA'")
+```
+
+In the next section, some more technicial information about the implementation is provided.
 
 ### Development
 
