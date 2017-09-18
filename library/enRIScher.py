@@ -17,10 +17,10 @@ from apiclient import discovery
 """
 ! ATTENTION !
 
-Make sure to enable the google API by running the `gdrive_account_setup.py`,
-following [this](....TODO..) tutorial. The file will create a credentials file
-in the home directory (config_file subfolder), from which credentials can be
-used.
+Make sure to enable the google API by following 
+[this](https://developers.google.com/drive/v3/web/quickstart/python) tutorial.
+The file will create a credentials file from which following authentifications 
+can be used.
 """
 
 class INBOReferenceSearcher(object):
