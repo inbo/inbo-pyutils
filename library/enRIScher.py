@@ -165,7 +165,7 @@ class RisRef(object):
             l1_index = self.keywords.index('L1')
             line = self.rislist[l1_index]
 
-            filename = re.search("([^/&\\\]*?\.\S*)", line.rstrip()).group(0)
+            filename = re.search("([^/&\\\]*?\.[a-zA-Z]{3})", line.rstrip()).group(0)
 
             name, url = ris_matcher.search_file(filename)
             if url:
