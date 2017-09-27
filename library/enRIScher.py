@@ -160,14 +160,15 @@ class RisRef(object):
     def handle_gdrivelink(self, ris_matcher):
         """add a google drive link to the entry, after the L1 file statement"""
 
-        l1_index = self.keywords.index('L1')
-        line = self.rislist[l1_index]
+        if 'L1' in self.keywords:
+            l1_index = self.keywords.index('L1')
+            line = self.rislist[l1_index]
 
-        filename = re.search("([^/&\\\]*?\.\S*)", line.rstrip()).group(0)
+            filename = re.search("([^/&\\\]*?\.\S*)", line.rstrip()).group(0)
 
-        name, url = ris_matcher.search_file(filename)
-        if url:
-            self.rislist.insert(l1_index + 1, "".join(["UR  - ", url, "\n"]))
+            name, url = ris_matcher.search_file(filename)
+            if url:
+                self.rislist.insert(l1_index + 1, "".join(["UR  - ", url, "\n"]))
 
     def handle_all(self, ris_matcher):
         self.handle_ur()
