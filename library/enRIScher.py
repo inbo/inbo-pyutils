@@ -69,6 +69,7 @@ class INBOReferenceSearcher(object):
     def _name_fixer(filename):
         """tweak a pdf file name to make it query-ready for the gdrive listing
         """
+        filename = filename.replace("'", "\\'")
         return "".join(["name='", filename, "'"])
 
     def query_references(self, query):
@@ -168,8 +169,12 @@ class RisRef(object):
 
             name, url = ris_matcher.search_file(filename)
             if url:
-                self.rislist.insert(l1_index + 1, "".join(["UR  - ", url, "\n"]))
-
+                if isinstance(url, str):
+                    self.rislist.insert(l1_index + 1, "".join(["UR  - ", url, "\n"]))
+                else:
+                    url = url[0] #pick first file of list
+                    self.rislist.insert(l1_index + 1, "".join(["UR  - ", url, "\n"]))
+                    
     def handle_all(self, ris_matcher):
         self.handle_ur()
         self.handle_st()
