@@ -1,0 +1,31 @@
+name;author
+Anelasmocephalus cambridgei ;Westwood, 1874
+Trogulus closanicus Avram;
+Trogulus nepaeformis ;Scopoli, 1763
+Trogulus tricarinatus ;Linnaeus, 1767
+Mitostoma chrysomelas ;Hermann, 1804
+Nemastoma bimaculatum ;Fabricius, 1775
+Nemastoma dentigerum Canestrini;
+Nemastoma lugubre ;Müller, 1776
+Paranemastoma quadripunctatum ;Perty, 1833
+Amilenus aurantiacus ;Simon, 1881
+Dicranopalpus ramosus ;Simon, 1909
+Homalenotus quadridentatus ;Cuvier, 1795
+Lacinius horridus ;Panzer, 1794
+Lacinius ephippiatus ;C.L. Koch, 1835
+Leiobunum blackwalli ;Meade, 1861
+Leiobunum rotundum ;Latreille, 1798
+Leiobunum sp A;
+Lophopilio palpinalis ;Herbst, 1799
+Mitopus morio ;Fabricius, 1799
+Nelima doriae ;Canestrini, 1871
+Odiellus spinosus ;Bosc, 1792
+Oligolophus hanseni ;Kraepelin, 1896
+Oligolophus tridens ;C.L. Koch, 1836
+Paroligolophus agrestis ;Meade, 1855
+Opilio canestrinii ;Thorell, 1876
+Opilio parietinus ;Degeer, 1778
+Opilio saxatilis ;C.L. Koch, 1839
+Phalangium opilio ;Linnaeus, 1758
+Platybunus pinetorum ;C.L.Koch, 1839
+Rilaena triangularis ;Herbst, 1799

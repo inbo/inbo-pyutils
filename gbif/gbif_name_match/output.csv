@@ -1,0 +1,6 @@
+name,kingdom,euConcernStatus,gbifapi_usageKey,gbifapi_scientificName,gbifapi_canonicalName,gbifapi_status,gbifapi_rank,gbifapi_matchType,gbifapi_confidence,gbifapi_acceptedKey,gbifapi_acceptedScientificName
+Alopochen aegyptiaca,Animalia,under consideration,2498252,"Alopochen aegyptiaca (Linnaeus, 1766)",Alopochen aegyptiaca,ACCEPTED,SPECIES,EXACT,100,2498252,"Alopochen aegyptiaca (Linnaeus, 1766)"
+Cotoneaster ganghobaensis,Plantae,,3025989,Cotoneaster ganghobaensis J.Fryer & B.Hylmö,Cotoneaster ganghobaensis,ACCEPTED,SPECIES,EXACT,100,3025989,Cotoneaster ganghobaensis J.Fryer & B.Hylmö
+Cotoneaster hylmoei,Plantae,,3025758,Cotoneaster hylmoei K.E.Flinck & J.Fryer,Cotoneaster hylmoei,ACCEPTED,SPECIES,EXACT,100,3025758,Cotoneaster hylmoei K.E.Flinck & J.Fryer
+Cotoneaster x suecicus,Plantae,,3026040,Cotoneaster suecicus G.Klotz,Cotoneaster suecicus,ACCEPTED,SPECIES,EXACT,100,3026040,Cotoneaster suecicus G.Klotz
+Euthamia graminifolia,Plantae,under preparation,3092782,Euthamia graminifolia (L.) Nutt.,Euthamia graminifolia,ACCEPTED,SPECIES,EXACT,99,3092782,Euthamia graminifolia (L.) Nutt.
